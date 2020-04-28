@@ -4,5 +4,6 @@ export class Pokemon {
 
   id: number;
   name: string;
-  types: Type[]
+  types: Type[];
+  sprites: string[];
 }
