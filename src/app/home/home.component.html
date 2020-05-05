@@ -8,7 +8,21 @@
       <div class="poke-list float-left"></div>
       <div class="poke-list float-right"></div>
     </div>
-    <input class="search-input" type="text" placeholder="Suchen..">
+
+    <input type="text" class="search-input" placeholder="Search Pokemon"
+           [matAutocomplete]="auto"
+           (keyup)="searchTerm.next($event.target.value)">
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let pokemon of searchResults" [value]="pokemon" class="pokemon-option">
+        <div class="pokemon-option">
+          <img [src]="pokemon.sprites.front_default" height="64" width="64"/>
+          <span>{{pokemon.name}}</span>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+
+
     <div class="poke-list-full">
 
     </div>

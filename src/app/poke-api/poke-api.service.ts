@@ -16,7 +16,7 @@ export class PokeApiService {
   }
 
   public findAllPokemonByName(name: string): Observable<Pokemon[]> {
-    return this.http.get<ListResponse>(PokeApiService.URL + 'pokemon').pipe(
+    return this.http.get<ListResponse>(PokeApiService.URL + 'pokemon?limit=1000').pipe(
       flatMap(references => {
           return forkJoin(references.results
             .filter(reference => reference.name.toLowerCase().startsWith(name.toLowerCase()))
