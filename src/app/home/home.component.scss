@@ -7,7 +7,7 @@
 }
 
 .content {
-  padding: 10vh 10vw;
+  padding: 10vh 5vw;
 
 }
 
@@ -29,12 +29,28 @@
 
 .poke-list {
   border: #707070 1px solid;
-  background-color: white;
-  opacity: 0.7;
-  height: 10vh;
-  width: 40%;
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 15vh;
+  padding: 10px 0;
+  width: 49%;
 }
 
+.delete {
+  display: block;
+  margin: 0 auto;
+}
+
+.pokediv {
+  width: fit-content;
+  img {
+    height: 10vh;
+  }
+}
+
+
+p {
+  margin: 0 auto;
+}
 .text-pokemon {
   height: 7%;
 }

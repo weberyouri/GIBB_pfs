@@ -15,6 +15,11 @@ export class HomeComponent implements OnInit {
   searchTerm = new Subject<string>();
   searchResults: Pokemon[];
 
+  currentSelection: Pokemon;
+
+  opponent: Pokemon[] = [];
+  player: Pokemon[] = [];
+
   constructor(private pokeApiService: PokeApiService) { }
 
   ngOnInit(): void {
@@ -30,5 +35,29 @@ export class HomeComponent implements OnInit {
       this.searchResults = result;
       console.log(result);
     });
+  }
+
+  add(event) {
+    this.currentSelection = event.option.value;
+  }
+
+  addToPlayer() {
+    this.player.push(this.currentSelection);
+    this.currentSelection = null;
+  }
+
+  addToOponnent() {
+    this.opponent.push(this.currentSelection);
+    this.currentSelection = null;
+  }
+
+  removeFromPlayer(pokemon) {
+    const index = this.player.indexOf(pokemon);
+    this.player.splice(index, 1);
+  }
+
+  removeFromOponnent(pokemon) {
+    const index = this.opponent.indexOf(pokemon);
+    this.opponent.splice(index, 1);
   }
 }
