@@ -7,6 +7,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [HomeComponent],
@@ -18,6 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatAutocompleteModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
   ],
   exports: [
     HomeComponent

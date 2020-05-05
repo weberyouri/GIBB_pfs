@@ -1,22 +1,22 @@
 <div class="home">
   <div class="content">
-    <div class="h-7">
-      <h1 class="w-50 float-left">Deine Pokémon</h1>
-      <h1 class="w-40 float-right">Gegnerische Pokémon</h1></div>
-    <div class="h-10 mb-2">
-      <div class="poke-list float-left">
+    <div class="headers">
+      <h1>Deine Pokémon</h1>
+      <h1>Gegnerische Pokémon</h1></div>
+    <div class="boxes">
+      <div class="poke-list">
         <div *ngFor="let pokemon of player" class="pokediv">
-          <p>{{pokemon.name}}</p>
-          <img [src]="pokemon.sprites.front_default">
+          <img [src]="pokemon.sprites.front_default" [matTooltip]="pokemon.name">
           <button (click)="removeFromPlayer(pokemon)" class="delete" mat-icon-button><mat-icon>delete</mat-icon></button>
         </div>
+        <div class="hint" *ngIf="player.length === 6">Team ist voll!</div>
       </div>
-      <div class="poke-list float-right">
+      <div class="poke-list">
         <div *ngFor="let pokemon of opponent" class="pokediv">
-          <p>{{pokemon.name}}</p>
-          <img [src]="pokemon.sprites.front_default">
+          <img [src]="pokemon.sprites.front_default" [matTooltip]="pokemon.name">
           <button (click)="removeFromOponnent(pokemon)" class="delete" mat-icon-button><mat-icon>delete</mat-icon></button>
         </div>
+        <div class="hint" *ngIf="opponent.length === 6">Team ist voll!</div>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
            (keyup)="searchTerm.next($event.target.value)">
 
     <mat-autocomplete #auto (optionSelected)="add($event)">
-      <mat-option *ngFor="let pokemon of searchResults" [value]="pokemon" class="pokemon-option">
+      <mat-option *ngFor="let pokemon of searchResults" [value]="pokemon.name" class="pokemon-option">
         <div class="pokemon-option">
           <img [src]="pokemon.sprites.front_default" height="64" width="64"/>
           <span>{{pokemon.name}}</span>
@@ -33,8 +33,8 @@
       </mat-option>
     </mat-autocomplete>
 
-    <button mat-flat-button (click)="addToPlayer()" *ngIf="currentSelection">Zu meinem Team hinzufügen</button>
-    <button mat-flat-button (click)="addToOponnent()" *ngIf="currentSelection">Zum gegnerischen Team hinzufügen</button>
+    <button mat-flat-button (click)="addToPlayer()" *ngIf="currentSelection && player.length < 6">Zu meinem Team hinzufügen</button>
+    <button mat-flat-button (click)="addToOponnent()" *ngIf="currentSelection && opponent.length < 6">Zum gegnerischen Team hinzufügen</button>
 
     <button mat-raised-button class="float-right" >Start  ></button>
   </div>

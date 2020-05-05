@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {debounceTime, filter} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {PokeApiService} from "../poke-api/poke-api.service";
 import {Pokemon} from "../poke-api/model/pokemon";
-import {log} from "util";
 
 @Component({
   selector: 'app-home',
@@ -15,7 +14,7 @@ export class HomeComponent implements OnInit {
   searchTerm = new Subject<string>();
   searchResults: Pokemon[];
 
-  currentSelection: Pokemon;
+  currentSelection = '';
 
   opponent: Pokemon[] = [];
   player: Pokemon[] = [];
@@ -42,12 +41,12 @@ export class HomeComponent implements OnInit {
   }
 
   addToPlayer() {
-    this.player.push(this.currentSelection);
+    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.player.push(pokemon));
     this.currentSelection = null;
   }
 
   addToOponnent() {
-    this.opponent.push(this.currentSelection);
+    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.opponent.push(pokemon));
     this.currentSelection = null;
   }
 
