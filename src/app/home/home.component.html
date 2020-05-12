@@ -5,18 +5,18 @@
       <h1>Gegnerische Pokémon</h1></div>
     <div class="boxes">
       <div class="poke-list">
-        <div *ngFor="let pokemon of player" class="pokediv">
+        <div *ngFor="let pokemon of playerTeam" class="pokediv">
           <img [src]="pokemon.sprites.front_default" [matTooltip]="pokemon.name">
           <button (click)="removeFromPlayer(pokemon)" class="delete" mat-icon-button><mat-icon>delete</mat-icon></button>
         </div>
-        <div class="hint" *ngIf="player.length === 6">Team ist voll!</div>
+        <div class="hint" *ngIf="playerTeam.length === 6">Team ist voll!</div>
       </div>
       <div class="poke-list">
-        <div *ngFor="let pokemon of opponent" class="pokediv">
+        <div *ngFor="let pokemon of opponentTeam" class="pokediv">
           <img [src]="pokemon.sprites.front_default" [matTooltip]="pokemon.name">
           <button (click)="removeFromOponnent(pokemon)" class="delete" mat-icon-button><mat-icon>delete</mat-icon></button>
         </div>
-        <div class="hint" *ngIf="opponent.length === 6">Team ist voll!</div>
+        <div class="hint" *ngIf="opponentTeam.length === 6">Team ist voll!</div>
       </div>
     </div>
 
@@ -33,9 +33,9 @@
       </mat-option>
     </mat-autocomplete>
 
-    <button mat-flat-button (click)="addToPlayer()" *ngIf="currentSelection && player.length < 6">Zu meinem Team hinzufügen</button>
-    <button mat-flat-button (click)="addToOponnent()" *ngIf="currentSelection && opponent.length < 6">Zum gegnerischen Team hinzufügen</button>
+    <button mat-flat-button (click)="addToPlayer()" *ngIf="currentSelection && playerTeam.length < 6">Zu meinem Team hinzufügen</button>
+    <button mat-flat-button (click)="addToOponnent()" *ngIf="currentSelection && opponentTeam.length < 6">Zum gegnerischen Team hinzufügen</button>
 
-    <button mat-raised-button class="float-right" >Start  ></button>
+    <button mat-raised-button class="float-right" (click)="startFight()" [disabled]="!canStart()">Start  ></button>
   </div>
 </div>

@@ -7,10 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HomeModule} from "./home/home.module";
 import {PokeAPIModule} from "./poke-api/poke-api.module";
 import {HttpClientModule} from "@angular/common/http";
+import { FightComponent } from './fight/fight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FightComponent,
   ],
   imports: [
     BrowserModule,

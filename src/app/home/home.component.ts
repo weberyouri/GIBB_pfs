@@ -3,6 +3,8 @@ import {debounceTime, filter} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {PokeApiService} from "../poke-api/poke-api.service";
 import {Pokemon} from "../poke-api/model/pokemon";
+import {Router} from "@angular/router";
+import {FightService} from "../fight/fight.service";
 
 @Component({
   selector: 'app-home',
@@ -16,10 +18,12 @@ export class HomeComponent implements OnInit {
 
   currentSelection = '';
 
-  opponent: Pokemon[] = [];
-  player: Pokemon[] = [];
+  opponentTeam: Pokemon[] = [];
+  playerTeam: Pokemon[] = [];
 
-  constructor(private pokeApiService: PokeApiService) { }
+  constructor(private pokeApiService: PokeApiService,
+              private fightService: FightService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.searchTerm.pipe(
@@ -41,22 +45,32 @@ export class HomeComponent implements OnInit {
   }
 
   addToPlayer() {
-    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.player.push(pokemon));
+    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.playerTeam.push(pokemon));
     this.currentSelection = null;
   }
 
   addToOponnent() {
-    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.opponent.push(pokemon));
+    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.opponentTeam.push(pokemon));
     this.currentSelection = null;
   }
 
   removeFromPlayer(pokemon) {
-    const index = this.player.indexOf(pokemon);
-    this.player.splice(index, 1);
+    const index = this.playerTeam.indexOf(pokemon);
+    this.playerTeam.splice(index, 1);
   }
 
   removeFromOponnent(pokemon) {
-    const index = this.opponent.indexOf(pokemon);
-    this.opponent.splice(index, 1);
+    const index = this.opponentTeam.indexOf(pokemon);
+    this.opponentTeam.splice(index, 1);
+  }
+
+  canStart(): boolean {
+    return this.playerTeam.length > 0 && this.opponentTeam.length > 0;
+  }
+
+  startFight() {
+    this.fightService.playerTeam = this.playerTeam;
+    this.fightService.opponentTeam = this.opponentTeam;
+    this.router.navigate(['fight']);
   }
 }
