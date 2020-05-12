@@ -1,0 +1,27 @@
+.container {
+  background-image: url("../../assets/home-background.png");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+.player-pokemon {
+
+  height: 60%;
+
+  .player-pokemon {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.opponent-pokemon {
+
+  height: 40%;
+}
+
+.level {
+  color: dodgerblue;
+  font-weight: bold;
+}
