@@ -19,7 +19,7 @@
     <button (click)="resetMenu()" *ngIf="menuPokemon || menuFight"  id="menu-back-button">zurück</button>
 
     <div class="attacks" *ngIf="menuFight">
-      <button class="attack" *ngFor="let move of currentPlayerPokemon.moves" (click)="fight(move)">
+      <button class="attack" *ngFor="let move of currentPlayerPokemon.moves" (click)="fight(move)" [disabled]="move.cpp < 1">
         <span style="position: absolute; top: 0; left: 0">{{move.name}}</span>
         <span style="position: absolute; top: 0; right: 0">{{move.type.name}}</span>
         <span style="position: absolute; bottom: 0; right: 0">{{move.cpp + '/' + move.pp}}</span>
@@ -27,12 +27,17 @@
     </div>
 
     <div class="pokemons" *ngIf="menuPokemon">
-      <button class="pokemon" *ngFor="let pkmn of playerTeam" [disabled]="pkmn === currentPlayerPokemon" (click)="switchPokemon(pkmn)">
+      <button class="pokemon" *ngFor="let pkmn of playerTeam" [disabled]="pkmn === currentPlayerPokemon && !selectingAfterDefeat" (click)="selectingAfterDefeat ? changePokemon(pkmn) : switchPokemon(pkmn)">
         <img style="position: absolute; height: 100%; left: 0; top: 0" [src]="pkmn.sprites.front_default"/>
         <span>{{pkmn.name}}</span>
         <span class="level" style="position: absolute; right: 5px">Lv. 50</span>
       </button>
     </div>
   </div>
+</div>
+
+<div class="win-screen" *ngIf="opponentTeam.length === 0 || playerTeam.length === 0">
+  <h1 *ngIf="opponentTeam.length === 0">Du hast gewonnen!</h1>
+  <h1 *ngIf="playerTeam.length === 0">Du hast verloren!</h1>
 </div>
 
