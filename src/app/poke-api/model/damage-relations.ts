@@ -2,10 +2,10 @@ import {Type} from "./type";
 
 export class DamageRelations {
 
-  noDamageTo: Type[];
-  halfDamageTo: Type[];
-  doubleDamageTo: Type[];
-  noDamageFrom: Type[];
-  halfDamageFrom: Type[];
-  doubleDamageFrom: Type[];
+  no_damage_to: Type[];
+  half_damage_to: Type[];
+  double_damage_to: Type[];
+  no_damage_from: Type[];
+  half_damage_from: Type[];
+  double_damage_from: Type[];
 }

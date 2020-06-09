@@ -7,21 +7,122 @@
 }
 
 .player-pokemon {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  height: 30vh;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
 
-  height: 60%;
+}
 
-  .player-pokemon {
-    width: 200px;
-    height: 200px;
-  }
+.pokemon-icon {
+  height: 100%;
 }
 
 .opponent-pokemon {
-
-  height: 40%;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  height: 30vh;
+  position: fixed;
+  top: 30px;
+  right: 300px;
 }
 
 .level {
   color: dodgerblue;
   font-weight: bold;
+}
+
+.hp {
+  color: black;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.control-panel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.console {
+  background: white;
+  border: 3px dashed black;
+  height: 5vh;
+  width: 35vw;
+  padding: 15px;
+  vertical-align: center;
+}
+
+.fight-menu {
+  height: 30vh;
+  width: 35vw;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: white;
+}
+
+#menu-fight-button {
+  height: 100%;
+  width: 68%;
+  margin: 0 2% 0 0;
+  background: orangered;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+}
+
+#menu-pokemon-button {
+  cursor: pointer;
+  height: 100%;
+  width: 30%;
+  margin: 0;
+  background: green;
+  font-size: 1.5em;
+  color: white;
+}
+
+#menu-back-button {
+  position: absolute;
+  bottom: 0;
+  left:  0;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.5em;
+  background: cornflowerblue;
+  color: white;
+}
+
+.attacks {
+  margin: 0;
+}
+
+.attack {
+  position: relative;
+  height: 100px;
+  width: 48%;
+  margin: 5px 1%;
+  cursor: pointer;
+}
+
+.pokemons {
+  margin: 0;
+}
+
+.pokemon {
+  position: relative;
+  height: 8vh;
+  width: 48%;
+  margin: 5px 1%;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 }

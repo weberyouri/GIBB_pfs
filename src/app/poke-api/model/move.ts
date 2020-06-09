@@ -6,6 +6,7 @@ export class Move {
   power: number;
   accuracy: number;
   pp: number;
+  cpp: number;
   type: Type;
   damage_class: {
     name: string;

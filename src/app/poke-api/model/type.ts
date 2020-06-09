@@ -4,5 +4,5 @@ export class Type {
 
   id: number;
   name: string;
-  damageRelations: DamageRelations;
+  damage_relations: DamageRelations;
 }
