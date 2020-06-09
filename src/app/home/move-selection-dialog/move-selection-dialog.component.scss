@@ -1,0 +1,17 @@
+.move {
+  padding: 10px 0;
+  border-bottom: 1px solid white;
+  height: fit-content;
+
+  .name {
+    font-size: 1.3em;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 5px 0 0;
+  }
+
+  .attr {
+    margin: 0 5px;
+    display: inline-block;
+  }
+}

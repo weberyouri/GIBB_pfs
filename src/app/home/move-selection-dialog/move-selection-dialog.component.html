@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Wähle die Attacken für dein Pokemon aus (max 4):</h1>
+<div mat-dialog-content>
+  <form [formGroup]="allMovesFG" (ngSubmit)="submit()">
+    <ng-container *ngFor="let move of getFormArray().controls; let i = index" formArrayName="moves">
+      <div *ngIf="move" class="move">
+        <p class="name" *ngIf="allMoves[i].name">{{allMoves[i].name}}</p>
+        <p class="attr" *ngIf="allMoves[i].type"><b>Typ:</b> {{allMoves[i].type.name}}</p>
+        <p class="attr" *ngIf="allMoves[i].damage_class"><b>Kat:</b> {{allMoves[i].damage_class.name}}</p>
+        <p class="attr" *ngIf="allMoves[i].power"><b>Stärke:</b> {{allMoves[i].power}}</p>
+        <p class="attr" *ngIf="allMoves[i].accuracy"><b>Gen:</b> {{allMoves[i].accuracy}}</p>
+        <p class="attr" *ngIf="allMoves[i].pp"><b>Ap:</b> {{allMoves[i].pp}}</p>
+        <mat-checkbox [formControlName]="i"></mat-checkbox>
+      </div>
+    </ng-container>
+    <div mat-dialog-actions>
+      <button mat-button type="submit" [disabled]="!isValid()">Ok</button>
+    </div>
+  </form>
+</div>
+

@@ -1,5 +1,6 @@
 import {Type} from "./type";
 import {Sprites} from "./sprites";
+import {Move} from "./move";
 
 export class Pokemon {
 
@@ -7,4 +8,5 @@ export class Pokemon {
   name: string;
   types: Type[];
   sprites: Sprites;
+  moves: Move[];
 }

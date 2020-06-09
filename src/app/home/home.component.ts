@@ -5,6 +5,9 @@ import {PokeApiService} from "../poke-api/poke-api.service";
 import {Pokemon} from "../poke-api/model/pokemon";
 import {Router} from "@angular/router";
 import {FightService} from "../fight/fight.service";
+import {MatDialog} from "@angular/material/dialog";
+import {MoveSelectionDialogComponent} from "./move-selection-dialog/move-selection-dialog.component";
+import {Move} from "../poke-api/model/move";
 
 @Component({
   selector: 'app-home',
@@ -23,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private pokeApiService: PokeApiService,
               private fightService: FightService,
+              private dialog: MatDialog,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -33,10 +37,8 @@ export class HomeComponent implements OnInit {
   }
 
   search(term: string): void {
-    console.log('searching with term: ' + term);
     this.pokeApiService.findAllPokemonByName(term).subscribe(result => {
       this.searchResults = result;
-      console.log(result);
     });
   }
 
@@ -45,12 +47,18 @@ export class HomeComponent implements OnInit {
   }
 
   addToPlayer() {
-    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.playerTeam.push(pokemon));
+    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(async pokemon => {
+      pokemon.moves = await this.openMoveDialog(pokemon);
+      this.playerTeam.push(pokemon);
+    });
     this.currentSelection = null;
   }
 
   addToOponnent() {
-    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(pokemon => this.opponentTeam.push(pokemon));
+    this.pokeApiService.findPokemonByName(this.currentSelection).subscribe(async pokemon => {
+      pokemon.moves = await this.openMoveDialog(pokemon);
+      this.opponentTeam.push(pokemon);
+    });
     this.currentSelection = null;
   }
 
@@ -72,5 +80,14 @@ export class HomeComponent implements OnInit {
     this.fightService.playerTeam = this.playerTeam;
     this.fightService.opponentTeam = this.opponentTeam;
     this.router.navigate(['fight']);
+  }
+
+  private openMoveDialog(pokemon: Pokemon): Promise<Move[]> {
+    const dialogRef = this.dialog.open(MoveSelectionDialogComponent, {
+      width: '700px',
+      disableClose: true,
+      data: {moves: pokemon.moves}
+    });
+    return dialogRef.afterClosed().toPromise();
   }
 }
