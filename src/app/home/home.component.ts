@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.searchTerm.pipe(
       filter(term => term.length > 1),
-      debounceTime(500),
+      debounceTime(100),
     ).subscribe(term => this.search(term));
   }
 

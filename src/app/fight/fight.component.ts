@@ -82,7 +82,6 @@ export class FightComponent implements OnInit {
   }
 
   async changePokemon(pkmn: Pokemon) {
-    console.log('hi');
     this.currentPlayerPokemon = pkmn;
     this.currentMessage = 'Du wechselst ' + pkmn.name + ' ein!';
     this.menuPokemon = false;
